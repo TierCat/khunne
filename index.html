@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>มีอะไรให้ดูด้วย</title>
+
+    <!-- ป้องกันไม่ให้แอปสุ่มดึงรูปจากหน้าเว็บ -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="มีอะไรให้ดูด้วย ">
+    <meta property="og:description" content="เปิดดูเองนะ :)">
+
+    <!-- ใช้รูปปกกลาง ๆ ที่ไม่สปอยล์ -->
+    <meta property="og:image" content="https://birthday-cinematic.pages.dev/cover.jpg">
+    <meta property="og:image:secure_url" content="https://birthday-cinematic.pages.dev/cover.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- URL เว็บ -->
+    <meta property="og:url" content="https://birthday-cinematic.pages.dev/">
+
+    <!-- LINE / X / Discord และแพลตฟอร์มที่อ่าน Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="มีอะไรให้ดูด้วย ">
+    <meta name="twitter:description" content="เปิดดูเองนะ :)">
+    <meta name="twitter:image" content="https://birthday-cinematic.pages.dev/cover.jpg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div class="grain"></div>
+    <div class="ambient a1"></div><div class="ambient a2"></div>
+<div id="heartRain" class="heart-rain" aria-hidden="true"></div>
+<div id="nightStage" class="night-stage" aria-hidden="true">
+  <div class="night-haze haze-a"></div><div class="night-haze haze-b"></div>
+  <div id="movingStars" class="moving-stars"></div>
+</div>
+<div id="softWipe" class="soft-wipe" aria-hidden="true"></div>
+<div id="ageFlash" class="age-flash" aria-hidden="true"><span id="ageFlashNumber">20</span></div>
+<audio id="birthdayMusic" preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicToggle" class="music-toggle" aria-label="เปิดปิดเพลง"><b>♪</b><span>music</span></button>
+
+    <!-- 1 QUIZ -->
+    <section class="scene active" id="quiz">
+      <div class="shell center">
+        <span class="eyebrow">A tiny question first</span>
+        <h1>เดี๋ยวก่อน...</h1>
+        <p class="lead">รู้มั้ยว่าวันนี้วันอะไร?</p>
+        <div class="choices" id="choices">
+          <button class="choice wrong" data-msg="ก็ใช่... แต่ไม่ใช่อันนี้">วันธรรมดา ๆ วันนึง</button>
+          <button class="choice wrong escape" data-msg="ง่ายไป ไม่ให้ตอบอันนี้">วันเกิด <span data-name>คุณ</span></button>
+          <button class="choice wrong" data-msg="ยังไม่ใช่ ลองใหม่อีกที">วันหยุดแห่งชาติของเรา</button>
+          <button class="choice correct">วันเกิดหมา</button>
+        </div>
+        <div class="tease" id="tease">เลือกดี ๆ นะ</div>
+      </div>
+    </section>
+
+    <!-- 2 REVEAL -->
+    <section class="scene" id="reveal">
+      <div class="shell center reveal-scene-v10">
+        <div class="reveal-upper" id="revealUpper">
+          <span class="correct-pill">ถูกต้อง!</span>
+          <h1 id="revealTypedTitle">เก่งมาก</h1>
+          <p>รู้ตัวด้วยนะ :)</p>
+          <div class="reveal-x" aria-hidden="true"><i></i><i></i></div>
+        </div>
+
+        <div class="reveal-lower" id="revealLower">
+          <div class="divider"></div>
+          <h2>ก็วันเกิดคุณไง</h2>
+          <p>
+            จริง ๆ ก็ไม่ได้มีอะไรมากหรอก<br>
+            แต่มีบางอย่างอยากจะให้คุณ
+          </p>
+          <button class="primary" data-go="letter">รับจดหมาย</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 LETTER / AGE -->
+    <section class="scene" id="letter">
+      <div class="shell center">
+        <span class="eyebrow">special delivery</span>
+        <h2>มีจดหมายถึง <span data-name>คุณเน</span></h2>
+        <div class="envelope-wrap">
+          <div class="envelope" id="envelope">
+            <div class="env-back"></div>
+            <div class="paper-peek"></div>
+            <div class="env-front"></div>
+            <div class="env-flap"></div>
+            <button class="seal" id="seal" aria-label="กดค้างเพื่อเปิด">
+              <span class="seal-ring"></span>
+              <span class="age" id="ageOld">22</span>
+            </button>
+          </div>
+        </div>
+        <p class="hint" id="holdHint">เหมือนจะยังเปิดไม่ได้แฮะ<br><b>ลองกดค้างที่ตราประทับดูสิ</b></p>
+      </div>
+    </section>
+
+    <!-- 4 WISH -->
+    <section class="scene" id="wish">
+      <div class="shell narrow">
+        <span class="eyebrow">one wish for yourself</span>
+        <h1>ก่อนจะไปต่อ...</h1>
+        <p class="lead">ขออะไรให้ตัวเองสักอย่างนะ</p>
+        <div class="wish-card">
+          <label for="wishInput">ปีนี้เราอยาก...</label>
+          <textarea id="wishInput" maxlength="140" placeholder="เขียนคำอธิษฐานตรงนี้"></textarea>
+          <div class="wish-foot"><span id="count">0 / 140</span></div>
+        </div>
+        <button class="primary" id="saveWish">เก็บคำอธิษฐาน</button>
+        <p class="micro">เก็บไว้แค่ในเครื่องนี้นะ</p>
+      </div>
+    </section>
+
+
+    <!-- =========================
+     BIRTHDAY COUNTDOWN
+========================= -->
+<section class="scene countdown-scene" id="countdown">
+
+  <div class="countdown-glow"></div>
+
+  <div class="countdown-content">
+
+    <p class="countdown-small">
+      โอเค... พร้อมนะ
+    </p>
+
+    <div class="countdown-number" id="countdownNumber">
+      3
+    </div>
+
+    <p class="countdown-hint">
+      มีอะไรจะให้ดูนิดนึง
+    </p>
+
+  </div>
+
+</section>
+
+    <!-- 5 DARK CAKE -->
+    <section class="scene dark candle-night night-panel" id="cake">
+      <div class="shell center">
+        <div class="cake-copy">
+          <span class="eyebrow light">make a wish</span>
+          <h2>อธิษฐานไว้ดีแล้วใช่ไหม?</h2>
+        </div>
+        <div class="cake-art">
+          <div class="flame" id="flame"><i></i></div>
+          <div class="candle"></div>
+          <div class="frosting"></div>
+          <div class="cake-body"></div>
+          <div class="plate"></div>
+          <div class="smoke" id="smoke">⌁</div>
+        </div>
+        <div class="cake-actions">
+          <button class="light-btn" id="blowBtn">เป่าเทียน</button>
+          <button class="ghost-light" id="micBtn">ใช้ไมค์เป่า</button>
+        </div>
+        <p class="mic-status" id="micStatus"></p>
+      </div>
+    </section>
+
+    <!-- LIFE COUNTER -->
+    <section class="scene night-panel" id="lifetime">
+      <div class="life-sky">
+        <i class="life-glow g1"></i><i class="life-glow g2"></i>
+        <div class="life-stars" id="lifeStars"></div>
+      </div>
+      <div class="shell center life-shell">
+        <span class="eyebrow light">since you arrived</span>
+        <h1>รู้มั้ยว่าคุณอยู่บนโลกนี้<br><em>มานานแค่ไหนแล้ว?</em></h1>
+        <p class="life-sub">ตั้งแต่วันที่คุณเกิด โลกก็มีคุณเพิ่มมาอีกหนึ่งคน</p>
+        <div class="life-main">
+          <strong id="lifeDays">0</strong><span>วัน</span>
+        </div>
+        <div class="life-grid">
+          <div><b id="lifeHours">0</b><small>ชั่วโมง</small></div>
+          <div><b id="lifeMinutes">0</b><small>นาที</small></div>
+          <div><b id="lifeSeconds">0</b><small>วินาที</small></div>
+        </div>
+        <p class="life-note">และทุกวินาทีก็ยังเดินต่อไป :)</p>
+        <button class="light-btn" data-go="star">ไปส่งคำอธิษฐานกัน</button>
+      </div>
+    </section>
+
+    <!-- 6 STAR -->
+    <section class="scene dark candle-night night-panel" id="star"><div class="night-veil"></div>
+      <div class="stars" id="stars"></div>
+      <div class="shell center star-shell">
+        <div class="wish-quote" id="wishQuote">“...”</div>
+        <p>พร้อมส่งคำอธิษฐานนี้ไปไหม?</p>
+        <button class="light-btn" id="sendStar">ส่งไปให้ดวงดาว</button>
+        <div class="shooting" id="shooting"></div>
+        <div class="received" id="received"><b>✦</b><span>ได้รับแล้วนะ</span></div>
+      </div>
+    </section>
+
+    <!-- 7 MEMORIES -->
+    <section class="scene scroll-scene night-memories" id="memories">
+      <div class="memory-bg"></div>
+      <div class="memory-progress"><i id="memoryProgress"></i></div>
+      <div class="memory-intro">
+        <span class="eyebrow">some little memories</span>
+        <h1>แล้วก็... <em>มีรูปมาฝาก</em></h1><div class="memory-stars-note">✦ memories under the same sky ✦</div>
+        <p>ความทรงจำเล็ก ๆ ที่ตั้งใจเก็บไว้ให้คุณ</p>
+        <div class="scroll-cue"><i></i><span>เลื่อนลงช้า ๆ นะ</span></div>
+      </div>
+      <div class="memory-list">
+        <article class="memory-card left">
+          <div class="polaroid"><i class="glint"></i><i class="float-heart">♡</i><img src="1.jpg" alt="รูปความทรงจำ 1"><span>01</span></div>
+          <div class="memory-text"><small>MEMORY 01</small><h3>รูปนี้ชอบมาก</h3><p>บางวันธรรมดา ๆ ก็กลายเป็นวันที่น่าจดจำได้ เพราะมีคุณอยู่ในนั้น</p></div>
+        </article>
+        <article class="memory-card right">
+          <div class="polaroid"><i class="glint"></i><i class="float-heart">♡</i><img src="2.jpg" alt="รูปความทรงจำ 2"><span>02</span></div>
+          <div class="memory-text"><small>MEMORY 02</small><h3>อันนี้ก็น่ารักดี</h3><p>ขอบคุณสำหรับทุกเรื่องไร้สาระที่ยังหัวเราะด้วยกันได้เสมอ</p></div>
+        </article>
+        <article class="memory-card left">
+          <div class="polaroid"><i class="glint"></i><i class="float-heart">♡</i><img src="3.jpg" alt="รูปความทรงจำ 3"><span>03</span></div>
+          <div class="memory-text"><small>MEMORY 03</small><h3>เก็บไว้ดูนาน ๆ เลย</h3><p>หวังว่าปีนี้จะมีรูปดี ๆ และความทรงจำดี ๆ เพิ่มขึ้นอีกเยอะเลยนะ</p></div>
+        </article>
+      </div>
+      <div class="memory-end">
+        <p>365 วันผ่านไป มีเรื่องเกิดขึ้นตั้งเยอะ</p>
+        <h2>แต่ก็เก่งมากที่มาถึงตรงนี้นะ</h2>
+
+        <!-- VIDEO SURPRISE -->
+<section class="memory-video-section" id="memoryVideoSection">
+
+  <div class="video-tease">
+    <p class="video-tease-1">หมดแล้ว...</p>
+    <p class="video-tease-2">ล้อเล่น</p>
+    <p class="video-tease-3">ยังมีอีกอย่างที่เค้าอยากให้คุณดู</p>
+  </div>
+
+  <div class="birthday-video-wrap">
+
+<div class="birthday-video-frame photo-surprise-frame">
+  <img
+    id="surprisePhoto"
+    src="4.jpg"
+    alt="รูปพิเศษ"
+  >
+</div>
+
+<button
+  class="video-play-btn"
+  id="showSurpriseBtn"
+  type="button"
+>
+  ดูสิ่งสุดท้าย
+</button>
+
+  </div>
+
+  <div class="video-ending" id="videoEnding">
+    <p>โอเค คราวนี้หมดจริงแล้ว</p>
+    <h2>เหลือแค่อย่างสุดท้าย<br>ที่อยากบอกคุณ</h2>
+
+   
+  </div>
+
+</section>
+
+        <button class="primary" data-go="final">มีอีกอย่างอยากบอก</button>
+      </div>
+    </section>
+
+    <!-- 8 FINAL -->
+    <section class="scene" id="final">
+      <div class="shell center">
+        <div class="final-card">
+          <span class="eyebrow">one last thing</span>
+          <h1>Happy Birthday,<br><em data-name>คุณเน</em>.</h1>
+          <p>คุณเนโตขึ้นเป็นผู้ใหญ่แล้ววเค้าขอให้คุณหายเหนื่อยจากทุกๆเรื่องที่เจอนะขอให้มีความสุขมากที่สุดในโลกคุณมีเค้าอยู่ข้างๆคุณเสมอเค้ารักคุณที่สุ๊ดในโลกเลยอยู่กับเค้าไปนานๆนะคะ💗💐</p>
+          <div class="final-wish">
+            <small>และสุดท้ายนี้ ขอให้</small>
+            <strong id="finalWish">“คำอธิษฐานของคุณ”</strong>
+            <small>เป็นจริงนะ</small>
+          </div>
+          <div class="birthday-star">✦ <span>Your Birthday Star</span></div>
+        </div>
+        <button class="primary" data-go="share">ไปหน้าสุดท้าย</button>
+      </div>
+    </section>
+
+    <!-- 9 SHARE -->
+    <section class="scene" id="share">
+      <div class="share-layout">
+        <div>
+          <span class="eyebrow">keep this little day</span>
+          <h1>เก็บวันนี้ไว้หน่อยไหม?</h1>
+          <p class="lead">สร้างรูปไว้ลง Story ได้เลย</p>
+          <div class="story-actions">
+            <button class="primary" id="generateStory">สร้าง Birthday Story</button>
+            <button class="secondary" id="shareStory" disabled>ดาวน์โหลดรูป</button>
+          </div>
+          <div class="link-box">
+            <span>ลิงก์ไว้อวดเพื่อน</span>
+            <div><input id="shareLink" readonly><button id="copyLink">คัดลอก</button></div>
+          </div>
+          <button class="close-link" id="closeGift">ปิดของขวัญ</button>
+        </div>
+        <div class="story-preview">
+          <canvas id="storyCanvas" width="540" height="960"></canvas>
+          <div class="story-placeholder" id="storyPlaceholder">
+            <b>HAPPY<br>BIRTHDAY</b><span>กดสร้างรูปเพื่อดู Preview</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 CLOSE -->
+    <section class="scene" id="closed">
+      <div class="shell center">
+        <div class="closed-envelope">
+          <div class="mini-env"></div><div class="mini-seal" id="closeAge">20</div>
+        </div>
+        <h2>จบแล้ว :)</h2>
+        <p class="lead">ขอบคุณที่เกิดมานะ</p>
+        <span class="eyebrow">see you next year.</span>
+        <button class="secondary" onclick="location.reload()">เปิดดูอีกครั้ง</button>
+      </div>
+    </section>
+
+    <div class="tiny-star" id="tinyStar" title="คำอธิษฐานของปีนี้">✦</div>
+    <div class="toast" id="toast"></div>
+  </div>
+  <script src="script.js"></script>
+
+
+
+</body>
+</html>
