@@ -1030,7 +1030,7 @@ function startCakeMusic() {
   if (!musicStarted) {
     const seekToStart = () => {
       try {
-        birthdayMusic.currentTime = 195;
+        birthdayMusic.currentTime = 0;
       } catch (e) {}
     };
 
