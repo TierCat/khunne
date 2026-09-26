@@ -1,7 +1,7 @@
 const CONFIG = {
   name: "คุณเน",
-  oldAge: 21,
-  newAge: 22,
+  oldAge: 22,
+  newAge: 23,
   birthDate: "2003-09-27T00:00:00"
 };
 
